@@ -23,6 +23,7 @@ ActiveRecord::Base.connection.execute "DROP TABLE IF EXISTS products"
 
 ActiveRecord::Base.connection.create_table :products do |t|
   t.integer :version
+  t.timestamps
 end
 
 class Product < ActiveRecord::Base

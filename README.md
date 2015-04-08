@@ -1,5 +1,9 @@
 # IncrementWithSql
 
+[![Build Status](https://secure.travis-ci.org/mrkamel/increment_with_sql.png?branch=master)](http://travis-ci.org/mrkamel/increment_with_sql)
+[![Dependency Status](https://gemnasium.com/mrkamel/increment_with_sql.png?travis)](https://gemnasium.com/mrkamel/increment_with_sql)
+[![Gem Version](https://badge.fury.io/rb/increment_with_sql.svg)](http://badge.fury.io/rb/increment_with_sql)
+
 Provides `#increment_with_sql!` and `#decrement_with_sql!` for ActiveRecord::Base
 
 ## Installation
