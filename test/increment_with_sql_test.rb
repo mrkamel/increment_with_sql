@@ -12,20 +12,21 @@ class IncrementWithSqlTest < IncrementWithSql::TestCase
     assert_equal 2, Product.create(:version => 4).decrement_with_sql!(:version, 2).version
   end
 
-  def test_indifferent_access
-    assert_equal 3, Product.create(:version => 2).increment_with_sql!(:version).version
-    assert_equal 3, Product.create(:version => 2).increment_with_sql!("version").version
-  end
+  [:to_sym, :to_s].each do |method|
+    define_method "test_changes_with_#{method}" do
+      attribute = "version".send(method)
 
-  def test_changes
-    assert Product.create(:version => 2).increment_with_sql!(:version).changes.blank?
-    refute Product.create(:version => 2).increment_with_sql!(:version).version_changed?
+      assert_equal 2, Product.create(:version => 1).increment_with_sql!(attribute).version
 
-    product = Product.create(:version => 2).increment_with_sql!(:version)
-    Product.update_all :version => 0
-    product.save!
+      assert Product.create(:version => 1).increment_with_sql!(attribute).changes.blank?
+      refute Product.create(:version => 1).increment_with_sql!(attribute).version_changed?
 
-    assert_equal 0, Product.find(product.id).version
+      product = Product.create(:version => 2).increment_with_sql!(attribute)
+      Product.update_all :version => 0
+      product.save!
+
+      assert_equal 0, Product.find(product.id).version
+    end
   end
 end
 
