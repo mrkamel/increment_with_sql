@@ -12,6 +12,11 @@ class IncrementWithSqlTest < IncrementWithSql::TestCase
     assert_equal 2, Product.create(:version => 4).decrement_with_sql!(:version, 2).version
   end
 
+  def test_indifferent_access
+    assert_equal 3, Product.create(:version => 2).increment_with_sql!(:version).version
+    assert_equal 3, Product.create(:version => 2).increment_with_sql!("version").version
+  end
+
   def test_changes
     assert Product.create(:version => 2).increment_with_sql!(:version).changes.blank?
     refute Product.create(:version => 2).increment_with_sql!(:version).version_changed?

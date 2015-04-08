@@ -12,9 +12,9 @@ module IncrementWithSql
       send "#{attribute}=", self.class.where(:id => id).select(attribute).first.send(attribute)
 
       if respond_to?(:clear_attribute_changes, true)
-        send :clear_attribute_changes, [attribute, attribute.to_sym, attribute.to_s]
+        send :clear_attribute_changes, attribute
       else
-        changed_attributes.except! attribute, attribute.to_sym, attribute.to_s
+        changed_attributes.except! attribute.to_s
       end
     end 
 
