@@ -1,0 +1,34 @@
+
+addons:
+  postgresql: "9.3"
+
+before_script:
+  - mysql -e 'create database increment_with_sql;'
+  - psql -c 'create database increment_with_sql;' -U postgres
+
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1.1
+  - rbx-2
+  - jruby
+env:
+  - DATABASE=sqlite
+  - DATABASE=mysql
+  - DATABASE=postgres
+matrix:
+  allow_failures:
+    - rvm: rbx-2
+    - rvm: jruby
+
+gemfile:
+  - gemfiles/3.2.gemfile
+  - gemfiles/4.0.gemfile
+  - gemfiles/4.1.gemfile
+  - gemfiles/4.2.gemfile
+
+install:
+  - "travis_retry bundle install"
+
+script: "bundle exec rake test"
+

@@ -1,0 +1,17 @@
+
+sqlite:
+  adapter: sqlite3
+  database: ":memory:"
+
+mysql:
+  adapter: mysql2
+  database: increment_with_sql
+  username: root
+  encoding: utf8
+
+postgres:
+  adapter: postgresql
+  database: increment_with_sql
+  username: postgres
+  encoding: utf8
+
