@@ -14,14 +14,14 @@ class IncrementWithSqlTest < IncrementWithSql::TestCase
 
   [:to_sym, :to_s].each do |method|
     define_method "test_changes_with_#{method}" do
-      attribute = "version".send(method)
+      version = "version".send(method)
 
-      assert_equal 2, Product.create(:version => 1).increment_with_sql!(attribute).version
+      assert_equal 2, Product.create(:version => 1).increment_with_sql!(version).version
 
-      assert Product.create(:version => 1).increment_with_sql!(attribute).changes.blank?
-      refute Product.create(:version => 1).increment_with_sql!(attribute).version_changed?
+      assert Product.create(:version => 1).increment_with_sql!(version).changes.blank?
+      refute Product.create(:version => 1).increment_with_sql!(version).version_changed?
 
-      product = Product.create(:version => 2).increment_with_sql!(attribute)
+      product = Product.create(:version => 2).increment_with_sql!(version)
       Product.update_all :version => 0
       product.save!
 
