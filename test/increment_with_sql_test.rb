@@ -17,8 +17,10 @@ class IncrementWithSqlTest < IncrementWithSql::TestCase
     refute Product.create(:version => 2).increment_with_sql!(:version).version_changed?
 
     product = Product.create(:version => 2).increment_with_sql!(:version)
+    Product.update_all :version => 0
+    product.save!
 
-    assert_equal product.updated_at, product.tap { |product| sleep(2) && product.save! }.updated_at
+    assert_equal 0, Product.find(product.id).version
   end
 end
 
