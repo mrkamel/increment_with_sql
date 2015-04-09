@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["vetter@plainpicture.de"]
   spec.summary       = %q{Provides increment_with_sql! and decrement_with_sql! for ActiveRecord models}
   spec.description   = %q{Provides increment_with_sql! and decrement_with_sql! for ActiveRecord models}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/mrkamel/increment_with_sql"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
