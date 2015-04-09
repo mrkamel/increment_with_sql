@@ -3,8 +3,12 @@ require "increment_with_sql/version"
 require "active_record"
 
 module IncrementWithSql
+  class NotPersistedError < StandardError; end
+  class InvalidAttributeError < StandardError; end
+
   def increment_with_sql!(attribute, by = 1)
-    raise ArgumentError("Invalid attribute: #{attribute}") unless attribute_names.include?(attribute.to_s)
+    raise(NotPersistedError, "Record not persisted") if new_record?
+    raise(InvalidAttributeError, "Invalid attribute #{attribute}") unless attribute_names.include?(attribute.to_s)
 
     self.class.transaction do
       self.class.where(:id => id).update_all("#{self.class.connection.quote_column_name attribute} = CASE WHEN #{self.class.connection.quote_column_name attribute} IS NULL THEN 0 ELSE #{self.class.connection.quote_column_name attribute} END + #{by.to_i}")

@@ -19,18 +19,21 @@ DATABASE = ENV["DATABASE"] || "sqlite"
 
 ActiveRecord::Base.establish_connection YAML.load_file(File.expand_path("../database.yml", __FILE__))[DATABASE]
 
-ActiveRecord::Base.connection.execute "DROP TABLE IF EXISTS products"
+ActiveRecord::Base.connection.execute "DROP TABLE IF EXISTS items"
 
-ActiveRecord::Base.connection.create_table :products do |t|
-  t.integer :version
+ActiveRecord::Base.connection.create_table :items do |t|
+  t.integer :automatic_version
+  t.integer :manual_version
+  t.string :content
 end
 
-class Product < ActiveRecord::Base
+class Item < ActiveRecord::Base
+  after_save { increment_with_sql! :automatic_version }
 end
 
 class IncrementWithSql::TestCase
   def teardown
-    Product.delete_all
+    Item.delete_all
   end 
 end
 
