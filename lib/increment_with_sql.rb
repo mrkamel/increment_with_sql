@@ -13,7 +13,7 @@ module IncrementWithSql
     self.class.transaction do
       self.class.where(:id => id).update_all("#{self.class.connection.quote_column_name attribute} = CASE WHEN #{self.class.connection.quote_column_name attribute} IS NULL THEN 0 ELSE #{self.class.connection.quote_column_name attribute} END + #{by.to_i}")
 
-      send "#{attribute}=", self.class.where(:id => id).select(attribute).first.send(attribute)
+      send "#{attribute}=", self.class.unscope.where(:id => id).select(attribute).first.send(attribute)
 
       if respond_to?(:clear_attribute_changes, true)
         send :clear_attribute_changes, attribute
