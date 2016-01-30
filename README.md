@@ -4,7 +4,9 @@
 [![Dependency Status](https://gemnasium.com/mrkamel/increment_with_sql.png?travis)](https://gemnasium.com/mrkamel/increment_with_sql)
 [![Gem Version](https://badge.fury.io/rb/increment_with_sql.svg)](http://badge.fury.io/rb/increment_with_sql)
 
-Provides `#increment_with_sql!` and `#decrement_with_sql!` for ActiveRecord::Base
+Provides `#increment_with_sql!` and `#decrement_with_sql!` for ActiveRecord::Base,
+since ActiveRecord's bulti-in non-atomic `#increment` and `#decrement` methods don't
+provide database consistency.
 
 ## Installation
 
