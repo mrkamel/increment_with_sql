@@ -24,6 +24,22 @@ Or install it yourself as:
 
     $ gem install increment_with_sql
 
+## Usage
+
+It's simple:
+
+```ruby
+class MyModel < ActiveRecord::Base
+  def increment_counter
+    increment_with_sql! :counter
+  end
+
+  def decrement_counter
+    decrement_with_sql! :counter
+  end
+end
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/increment_with_sql/fork )
