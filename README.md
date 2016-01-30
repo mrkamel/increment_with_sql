@@ -30,11 +30,11 @@ It's simple:
 
 ```ruby
 class MyModel < ActiveRecord::Base
-  def increment_counter
+  def increment_counter!
     increment_with_sql! :counter
   end
 
-  def decrement_counter
+  def decrement_counter!
     decrement_with_sql! :counter
   end
 end
