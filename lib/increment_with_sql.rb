@@ -16,7 +16,7 @@ module IncrementWithSql
       send "#{attribute}=", self.class.unscoped.where(:id => id).select(attribute).first.send(attribute)
 
       if respond_to?(:clear_attribute_changes, true)
-        send :clear_attribute_changes, attribute
+        send :clear_attribute_changes, [attribute]
       else
         changed_attributes.except! attribute.to_s
       end
