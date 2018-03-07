@@ -7,10 +7,8 @@ before_script:
   - psql -c 'create database increment_with_sql;' -U postgres
 
 rvm:
-  - 1.9.3
-  - 2.0.0
   - 2.1.1
-  - rbx-2
+  - 2.3.3
   - jruby
 env:
   - DATABASE=sqlite
@@ -18,14 +16,13 @@ env:
   - DATABASE=postgres
 matrix:
   allow_failures:
-    - rvm: rbx-2
     - rvm: jruby
 
 gemfile:
-  - gemfiles/3.2.gemfile
   - gemfiles/4.0.gemfile
   - gemfiles/4.1.gemfile
   - gemfiles/4.2.gemfile
+  - gemfiles/5.1.gemfile
 
 install:
   - "travis_retry bundle install"
