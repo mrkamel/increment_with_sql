@@ -7,7 +7,7 @@ before_script:
   - psql -c 'create database increment_with_sql;' -U postgres
 
 rvm:
-  - 2.1.1
+  - 2.2.9
   - 2.3.3
   - jruby
 env:
